@@ -9,6 +9,6 @@ namespace HealthApp
     /// </summary>
     public partial class App : Application
     {
-    }
 
+    }
 }
