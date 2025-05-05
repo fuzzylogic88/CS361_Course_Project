@@ -3,14 +3,17 @@
  * CS361, Spring 2025
  */
 
+using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel;
+using System.Windows.Input;
 
 namespace HealthApp.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public partial class MainViewModel : INotifyPropertyChanged
     {
         private bool _isEventSet;
         private string? _labelText;
+        private object _currentPane = new DefaultView();
 
         public bool IsEventSet
         {
@@ -36,6 +39,36 @@ namespace HealthApp.ViewModels
                     OnPropertyChanged(nameof(UserMessageLabelText));
                 }
             }
+        }
+
+        public object CurrentPane
+        {
+            get => _currentPane;
+            set
+            {
+                if (_currentPane != value)
+                {
+                    _currentPane = value;
+                    OnPropertyChanged(nameof(CurrentPane));
+                }
+            }
+        }
+
+        public ICommand SwitchPaneCommand { get; }
+
+        public MainViewModel()
+        {
+            SwitchPaneCommand = new RelayCommand<string>(SwitchPane);
+        }
+
+        private void SwitchPane(string paneType)
+        {
+            CurrentPane = paneType switch
+            {
+                "timer" => new TimerPane(),
+                "calorie" => new CalorieReferencePane(),
+                _ => CurrentPane
+            };
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

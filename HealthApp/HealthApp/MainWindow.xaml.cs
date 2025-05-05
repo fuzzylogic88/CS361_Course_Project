@@ -3,6 +3,7 @@
  * CS361, Spring 2025
  */
 
+using HealthApp.ViewModels;
 using System.Windows;
 
 namespace HealthApp
@@ -12,9 +13,12 @@ namespace HealthApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainViewModel mv;
         public MainWindow(bool guest, string username)
         {
             InitializeComponent();
+            mv = new MainViewModel();
+            DataContext = mv;
 
             if (guest)
             {
@@ -26,16 +30,6 @@ namespace HealthApp
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void SettingsPaneButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -43,12 +37,12 @@ namespace HealthApp
 
         private void TimerPaneButton_Click(object sender, RoutedEventArgs e)
         {
-
+            mv.SwitchPaneCommand.Execute("timer");
         }
 
         private void FoodReferencePaneButton_Click(object sender, RoutedEventArgs e)
         {
-
+            mv.SwitchPaneCommand.Execute("calorie");
         }
 
         private void DataViewPaneButton_Click(object sender, RoutedEventArgs e)
@@ -59,6 +53,10 @@ namespace HealthApp
         private void TrackerPaneButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

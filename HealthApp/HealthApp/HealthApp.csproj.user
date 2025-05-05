@@ -5,6 +5,9 @@
     <Compile Update="CalorieReferencePane.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="DefaultView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="LoginWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

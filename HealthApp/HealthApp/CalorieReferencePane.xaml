@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:HealthApp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <StackPanel>
+        <TextBlock Text="calorie pane"></TextBlock>
+    </StackPanel>
 </UserControl>

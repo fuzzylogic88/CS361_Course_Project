@@ -3,15 +3,14 @@
  * CS361, Spring 2025
  */
 
+using HealthApp.ViewModels;
+using NetMQ;
+using NetMQ.Sockets;
+using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
-
-using HealthApp.ViewModels;
-using NetMQ.Sockets;
-using NetMQ;
-using System.Diagnostics;
-using System.IO;
 
 namespace HealthApp
 {
@@ -50,12 +49,13 @@ namespace HealthApp
 
             // read version into label
             var ver = Assembly.GetExecutingAssembly().GetName().Version;
-            if (ver != null) {
+            if (ver != null)
+            {
                 versionTextLabel.Content = "v" + ver.ToString();
             }
 
             // set up task for user message microservice
-            
+
             MainViewModel viewModel = (MainViewModel)this.DataContext;
             viewModel.UserMessageLabelText = "Loading message...";
             _dispatcher = Application.Current.Dispatcher;

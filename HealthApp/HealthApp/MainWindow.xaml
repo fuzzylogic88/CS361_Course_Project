@@ -55,14 +55,13 @@
         </UniformGrid>
 
         <!-- Main Content -->
-        <Grid Margin="200,0,0,0">
+        <Grid Margin="200,0,0,0" x:Name="MainContent">
             <Grid.Background>
                 <ImageBrush ImageSource="/Assets/default_bg.jpg"/>
             </Grid.Background>
-            <TextBlock Text=""
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       FontSize="24"/>
+            <ContentControl Content="{Binding CurrentPane}">
+                
+            </ContentControl>
         </Grid>
     </Grid>
 </Window>
