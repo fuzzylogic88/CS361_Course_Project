@@ -25,7 +25,7 @@ namespace HealthApp
             _dispatcher = Application.Current.Dispatcher;
             Task.Factory.StartNew(() =>
             {
-                UpdateTimerText(this,_dispatcher);
+                UpdateTimerText(this, _dispatcher);
             });
         }
 
@@ -59,6 +59,21 @@ namespace HealthApp
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
             paneTimer.Stop();
+        }
+
+        private void UndoResetButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void SetButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
