@@ -3,7 +3,6 @@
  * CS361, Spring 2025
  */
 
-
 using System.Windows;
 
 namespace HealthApp
@@ -13,10 +12,19 @@ namespace HealthApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(bool guest, string username)
         {
             InitializeComponent();
-            
+
+            if (guest)
+            {
+                this.Title = "HealthApp - Guest";
+            }
+            else
+            {
+                this.Title = $"HealthApp - {username}";
+            }
         }
+
     }
 }

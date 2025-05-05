@@ -95,7 +95,7 @@ namespace HealthApp
             if (AccountExists(user, pass))
             {
                 // successful login, pop up our main window
-                var mw = new MainWindow();
+                var mw = new MainWindow(false, user);
                 mw.Show();
                 this.Close();
             }
@@ -107,6 +107,14 @@ namespace HealthApp
                     MessageBoxEx.Show(this, $"Bad credentials! Try again.", "Invalid credentials.", MessageBoxButton.OK, MessageBoxImage.Error);
                 });
             }
+        }
+
+        private void GuestLoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            // guest login, no validation.
+            var mw = new MainWindow(true, string.Empty);
+            mw.Show();
+            this.Close();
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
@@ -149,8 +157,7 @@ namespace HealthApp
             if (!string.IsNullOrEmpty(user) && !string.IsNullOrEmpty(pass))
             {
                 // tack our new user onto the end of the file
-                using StreamWriter sw = File.AppendText(account_fname);
-                sw.WriteLine(new string($"{user},{pass}"));
+                File.AppendAllText(account_fname, new($"{Environment.NewLine}{user},{pass}"));
                 return true;
             }
             return false;
