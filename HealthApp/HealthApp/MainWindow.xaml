@@ -46,12 +46,12 @@
             </UniformGrid.Resources>
 
             <!-- Buttons -->
-            <Button Content="🍂  Workout Tracker" />
-            <Button Content="📅  Data View" />
-            <Button Content="🍊  Food Reference" />
-            <Button Content="⏲️  Timer" />
-            <Button Content="⚙️  Settings" />
-            <Button Content="👋  Exit" />
+            <Button Name="TrackerPaneButton" Content="🍂  Workout Tracker" Click="TrackerPaneButton_Click"/>
+            <Button Name="DataViewPaneButton" Content="📅  Data View" Click="DataViewPaneButton_Click"/>
+            <Button Name="FoodReferencePaneButton" Content="🍊  Food Reference" Click="FoodReferencePaneButton_Click" />
+            <Button Name="TimerPaneButton" Content="⏲️  Timer" Click="TimerPaneButton_Click"/>
+            <Button Name="SettingsPaneButton" Content="⚙️  Settings" Click="SettingsPaneButton_Click"/>
+            <Button Name="ExitButton" Content="👋  Exit" Click="ExitButton_Click"/>
         </UniformGrid>
 
         <!-- Main Content -->

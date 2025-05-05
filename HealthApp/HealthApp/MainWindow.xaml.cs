@@ -26,5 +26,39 @@ namespace HealthApp
             }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SettingsPaneButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TimerPaneButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void FoodReferencePaneButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DataViewPaneButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TrackerPaneButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
