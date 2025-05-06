@@ -1,9 +1,9 @@
-Burger,563 calories | Serving size: 1 item (219g) | https://fdc.nal.usda.gov/food-details/2706916/nutrients ,/Assets/FoodImages/burger.png,Fast Food
-Burrito,249 calories | Serving size: 1 item (189g) | https://fdc.nal.usda.gov/food-details/2707343/nutrients ,/Assets/FoodImages/burrito.jpg,Fast Food
-Coffee,5 calories | Serving size: 1 cup (240g) | https://fdc.nal.usda.gov/food-details/2710375/nutrients ,/Assets/FoodImages/coffee.jpg,Drinks
-Creme Brulee,294 calories | Serving size: 1 ramekin (260g) | https://fdc.nal.usda.gov/food-details/2705684/nutrients ,/Assets/FoodImages/cremebrulee.jpg,Desserts
-Ice Cream,248 calories | Serving size: 1 scoop (120g) | https://fdc.nal.usda.gov/food-details/2705630/nutrients ,/Assets/FoodImages/icecream.jpg,Desserts
-Orange Juice,117 calories | Serving size: 1 cup (248g) | https://fdc.nal.usda.gov/food-details/2709187/nutrients ,/Assets/FoodImages/juice.jpg,Drinks
-Sherbet,230 calories | Serving size: 1 scoop (160g) | https://fdc.nal.usda.gov/food-details/2705677/nutrients ,/Assets/FoodImages/sherbet.jpg,Desserts
-Belgian Waffle,280 calories | Serving size: 1 medium waffle (75g) | https://fdc.nal.usda.gov/food-details/2708325/nutrients ,/Assets/FoodImages/waffles.jpg,Breakfast
-Water,0 calories | Servcing size: 1 cup (240g) | https://fdc.nal.usda.gov/food-details/2710707/nutrients ,/Assets/FoodImages/water.jpg,Drinks
+Burger,563 calories | Serving size: 1 item (219g),https://fdc.nal.usda.gov/food-details/2706916/nutrients,/Assets/FoodImages/burger.png,Fast Food
+Burrito,249 calories | Serving size: 1 item (189g),https://fdc.nal.usda.gov/food-details/2707343/nutrients,/Assets/FoodImages/burrito.jpg,Fast Food
+Coffee,5 calories | Serving size: 1 cup (240g),https://fdc.nal.usda.gov/food-details/2710375/nutrients,/Assets/FoodImages/coffee.jpg,Drinks
+Creme Brulee,294 calories | Serving size: 1 ramekin (260g),https://fdc.nal.usda.gov/food-details/2705684/nutrients,/Assets/FoodImages/cremebrulee.jpg,Desserts
+Ice Cream,248 calories | Serving size: 1 scoop (120g),https://fdc.nal.usda.gov/food-details/2705630/nutrients,/Assets/FoodImages/icecream.jpg,Desserts
+Orange Juice,117 calories | Serving size: 1 cup (248g),https://fdc.nal.usda.gov/food-details/2709187/nutrients,/Assets/FoodImages/juice.jpg,Drinks
+Sherbet,230 calories | Serving size: 1 scoop (160g),https://fdc.nal.usda.gov/food-details/2705677/nutrients,/Assets/FoodImages/sherbet.jpg,Desserts
+Belgian Waffle,280 calories | Serving size: 1 medium waffle (75g),https://fdc.nal.usda.gov/food-details/2708325/nutrients,/Assets/FoodImages/waffles.jpg,Breakfast
+Water,0 calories | Servcing size: 1 cup (240g),https://fdc.nal.usda.gov/food-details/2710707/nutrients,/Assets/FoodImages/water.jpg,Drinks

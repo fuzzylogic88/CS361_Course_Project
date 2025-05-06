@@ -3,7 +3,6 @@
  * CS361, Spring 2025
  */
 
-using HealthApp.ViewModels;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
@@ -52,14 +51,14 @@ namespace HealthApp
         /// <returns></returns>
         public static HashSet<string> GetFoodCategories(List<string> fdata)
         {
-            HashSet<string> strings = new();
+            HashSet<string> strings = [];
             foreach (string f in fdata)
             {
                 string[] split = f.Split(',');
-                // idx 0: name, 1: desc, 2: image source, 3: category
-                if (!string.IsNullOrEmpty(split[3]))
+                // idx 0: name, 1: desc, 2: food URL, 3: image source, 4: category
+                if (!string.IsNullOrEmpty(split[4]))
                 {
-                    strings.Add(split[3]);
+                    strings.Add(split[4]);
                 }
             }
             return strings;
@@ -71,7 +70,7 @@ namespace HealthApp
             foreach (string f in fdata)
             {
                 string[] split = f.Split(",");
-                if (!string.IsNullOrEmpty(split[0]) && !string.IsNullOrEmpty(split[1]))
+                if (!string.IsNullOrEmpty(split[0]))
                 {
                     try
                     {
@@ -79,7 +78,8 @@ namespace HealthApp
                         {
                             FoodName = split[0],
                             Description = split[1],
-                            ImageSource = new BitmapImage(new Uri(split[2], UriKind.Relative))
+                            FoodLink = split[2],
+                            ImageSource = new BitmapImage(new Uri(split[3], UriKind.Relative))
                         };
                         fColl.Add(foodEntryControl);
                     }
@@ -115,7 +115,8 @@ namespace HealthApp
                             {
                                 FoodName = split[0],
                                 Description = split[1],
-                                ImageSource = new BitmapImage(new Uri(split[2], UriKind.Relative))
+                                FoodLink = split[2],
+                                ImageSource = new BitmapImage(new Uri(split[3], UriKind.Relative))
                             });
                         }
                     }
@@ -150,13 +151,14 @@ namespace HealthApp
                             string[] split = f.Split(",");
 
                             // match category and add to list
-                            if (split[3].Equals(selectedItemText, StringComparison.OrdinalIgnoreCase))
+                            if (split[4].Equals(selectedItemText, StringComparison.OrdinalIgnoreCase))
                             {
                                 sortedList.Add(new FoodEntryControl()
                                 {
                                     FoodName = split[0],
                                     Description = split[1],
-                                    ImageSource = new BitmapImage(new Uri(split[2], UriKind.Relative))
+                                    FoodLink = split[2],
+                                    ImageSource = new BitmapImage(new Uri(split[3], UriKind.Relative))
                                 });
                             }
                         }
@@ -169,42 +171,5 @@ namespace HealthApp
                 foodList.ItemsSource = sortedList;
             }
         }
-
-
-
-        //public bool FoodExists(string name)
-        //{
-        //    try
-        //    {
-        //        List<string> accountCollection = [.. File.ReadAllLines(account_fname)];
-        //        foreach (string account in accountCollection)
-        //        {
-        //            string[] split = account.Split(',');
-        //            if (split.Length == 2)
-        //            {
-        //                if (split[0] == user && pass == string.Empty)
-        //                {
-        //                    return true;
-        //                }
-        //                else if (split[0] == user && !string.IsNullOrEmpty(pass))
-        //                {
-        //                    if (split[1] == pass)
-        //                    {
-        //                        return true;
-        //                    }
-        //                    else
-        //                    {
-        //                        return false;
-        //                    }
-        //                }
-        //            }
-        //        }
-        //        return false;
-        //    }
-        //    catch
-        //    {
-        //        return false;
-        //    }
-        //}
     }
 }

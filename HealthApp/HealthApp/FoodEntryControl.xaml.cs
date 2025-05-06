@@ -29,6 +29,15 @@ namespace HealthApp
         public static readonly DependencyProperty DescriptionDP =
             DependencyProperty.Register("FoodDescription", typeof(string), typeof(FoodEntryControl));
 
+        public static readonly DependencyProperty InternetLocationDP = 
+            DependencyProperty.Register("FoodLink",typeof(string), typeof(FoodEntryControl));   
+
+        public string FoodLink
+        {
+            get => (string)GetValue(InternetLocationDP);
+            set => SetValue(InternetLocationDP, value);
+        }
+
         public ImageSource ImageSource
         {
             get => (ImageSource)GetValue(ImageSourceDP);
