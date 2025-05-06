@@ -8,17 +8,29 @@
     d:DesignHeight="75"
     d:DesignWidth="400"
     mc:Ignorable="d">
-    <ScrollViewer VerticalScrollBarVisibility="Hidden">
-        <ItemsControl x:Name="FoodItemsControl">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <local:FoodEntryControl
-                        Margin="0,0,0,10"
-                        Description="{Binding Description}"
-                        FoodName="{Binding Name}"
-                        ImageSource="{Binding ImageSource}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+    <ScrollViewer
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        HorizontalScrollBarVisibility="Auto"
+        VerticalScrollBarVisibility="Auto">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ItemsControl x:Name="FoodItemsControl">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:FoodEntryControl
+                            Margin="0,0,0,10"
+                            Description="{Binding Description}"
+                            FoodName="{Binding Name}"
+                            ImageSource="{Binding ImageSource}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
     </ScrollViewer>
 </UserControl>
