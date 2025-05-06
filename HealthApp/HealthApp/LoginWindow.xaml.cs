@@ -99,6 +99,14 @@ namespace HealthApp
                 mw.Show();
                 this.Close();
             }
+            else if (!AccountExists(user, string.Empty))
+            {
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    LoginWindow? lw = Application.Current.MainWindow as LoginWindow;
+                    MessageBoxEx.Show(this, $"User name is not associated with an account!\nPress 'Register to add {user} as a new user.", "User not registered.", MessageBoxButton.OK, MessageBoxImage.Information);
+                });
+            }
             else
             {
                 Application.Current.Dispatcher.InvokeAsync(() =>
@@ -107,6 +115,7 @@ namespace HealthApp
                     MessageBoxEx.Show(this, $"Bad credentials! Try again.", "Invalid credentials.", MessageBoxButton.OK, MessageBoxImage.Error);
                 });
             }
+            
         }
 
         private void GuestLoginButton_Click(object sender, RoutedEventArgs e)
@@ -173,10 +182,12 @@ namespace HealthApp
                     string[] split = account.Split(',');
                     if (split.Length == 2)
                     {
+                        // user is in file and no password provided (presence check)
                         if (split[0] == user && pass == string.Empty)
                         {
                             return true;
                         }
+                        // user in file and password provided (validation)
                         else if (split[0] == user && !string.IsNullOrEmpty(pass))
                         {
                             if (split[1] == pass)
@@ -187,6 +198,10 @@ namespace HealthApp
                             {
                                 return false;
                             }
+                        }
+                        else
+                        {
+                            return false;
                         }
                     }
                 }

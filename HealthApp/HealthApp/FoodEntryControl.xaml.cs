@@ -3,8 +3,10 @@
  * CS361, Spring 2025
  */
 
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace HealthApp
@@ -17,7 +19,13 @@ namespace HealthApp
         public FoodEntryControl()
         {
             InitializeComponent();
+            this.MouseDoubleClick += OnMouseDoubleClick;
             DataContext = this;
+        }
+        private void OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // determine which control was clicked by the user and open the URL in a browser
+            OpenLinkInBrowser(FoodLink);
         }
 
         public static readonly DependencyProperty ImageSourceDP =
@@ -52,6 +60,11 @@ namespace HealthApp
         {
             get => (string)GetValue(DescriptionDP);
             set => SetValue(DescriptionDP, value);
+        }
+
+        private void OpenLinkInBrowser(string url)
+        {
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
         }
     }
 }
