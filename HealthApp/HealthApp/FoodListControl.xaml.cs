@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace HealthApp
 {
@@ -20,9 +12,26 @@ namespace HealthApp
     /// </summary>
     public partial class FoodListControl : UserControl
     {
+        public static readonly DependencyProperty ItemsSourceProperty =
+            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(FoodListControl));
+
+        /// <summary>
+        /// A control to organize the FoodEntryControl item
+        /// </summary>
         public FoodListControl()
         {
             InitializeComponent();
+            FoodItemsControl.ItemsSource = ItemsSource;
+        }
+
+        public IEnumerable ItemsSource
+        {
+            get => (IEnumerable)GetValue(ItemsSourceProperty);
+            set
+            {
+                SetValue(ItemsSourceProperty, value);
+                FoodItemsControl.ItemsSource = value;
+            }
         }
     }
 }

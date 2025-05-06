@@ -5,6 +5,7 @@
 
 using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace HealthApp.ViewModels
@@ -74,5 +75,25 @@ namespace HealthApp.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
+        {
+            if (!Equals(field, newValue))
+            {
+                field = newValue;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                return true;
+            }
+
+            return false;
+        }
+
+        private string foodName;
+
+        public string FoodName { get => foodName; set => SetProperty(ref foodName, value); }
+
+        private string description;
+
+        public string Description { get => description; set => SetProperty(ref description, value); }
     }
 }

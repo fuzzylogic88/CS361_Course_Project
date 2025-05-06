@@ -17,13 +17,20 @@ namespace HealthApp
         {
             InitializeComponent();
 
-            //var foods = new List<ImageTextItem>()
-            //{
-            //    new() {
-            //        Image = new BitmapImage(new Uri("/Assets/FoodImages/burger.png", UriKind.Relative)),
-            //        Text = "Burger info goes here"
-            //    },
-            //};
+            var foods = new List<FoodEntryControl>()
+            {
+                new() {
+                    ImageSource = new BitmapImage(new Uri("/Assets/FoodImages/burger.png", UriKind.Relative)),
+                    FoodName = "Burger",
+                    Description = "Burger text description"
+                },
+                new() {
+                    ImageSource = new BitmapImage(new Uri("/Assets/FoodImages/burrito.png", UriKind.Relative)),
+                    FoodName = "Burrito",
+                    Description = "Burrito text description"
+                },
+            };
+            foodList.ItemsSource = foods;
         }
     }
 }

@@ -97,23 +97,19 @@
             Margin="5"
             VerticalAlignment="Bottom"
             LastChildFill="False">
-            <DockPanel.Resources>
-                <Style TargetType="Label">
-                    <Setter Property="FontSize" Value="14" />
-                    <Setter Property="Foreground" Value="White" />
-                </Style>
-            </DockPanel.Resources>
             <Label
                 x:Name="versionTextLabel"
                 Margin="5,0,0,5"
                 Content="VersionText"
                 DockPanel.Dock="Left"
+                FontSize="14"
                 Foreground="White" />
             <Label
                 x:Name="userMessageTextLabel"
                 Margin="0,0,0,0"
                 Content="{Binding UserMessageLabelText}"
                 DockPanel.Dock="Right"
+                FontSize="14"
                 Foreground="White" />
         </DockPanel>
     </Grid>
