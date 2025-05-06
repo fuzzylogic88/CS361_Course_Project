@@ -65,7 +65,7 @@
             <Button
                 Name="TimerPaneButton"
                 Click="TimerPaneButton_Click"
-                Content="⏲️  Timer" />
+                Content="⏲️  Stopwatch" />
             <Button
                 Name="SettingsPaneButton"
                 Click="SettingsPaneButton_Click"

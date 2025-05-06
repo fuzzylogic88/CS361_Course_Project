@@ -75,7 +75,7 @@ namespace HealthApp
             MessageBoxResult mbr = new();
             mbr = MessageBoxEx.Show($"This will clear the elapsed time!\nPress OK to clear, or Cancel to go back.", "Confirm reset", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
             
-            if (mbr == MessageBoxResult.Yes)
+            if (mbr == MessageBoxResult.OK)
             {
                 // quickly backup the elapsed time if we want to undo...
                 savedElapsed = paneTimer.Elapsed;
@@ -88,12 +88,8 @@ namespace HealthApp
                 {
                     paneTimer.Reset();
                 }
+                timerTextBlock.Text = new string($"{paneTimer.Elapsed.ToString(@"hh\:mm\:ss")}");
             }
-        }
-
-        private void SetButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
