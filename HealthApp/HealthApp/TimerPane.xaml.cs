@@ -3,7 +3,6 @@
  * CS361, Spring 2025
  */
 
-
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -74,11 +73,8 @@ namespace HealthApp
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult mbr = new();
-            Application.Current.Dispatcher.InvokeAsync(() =>
-            {
-                LoginWindow? lw = Application.Current.MainWindow as LoginWindow;
-                mbr = MessageBoxEx.Show(lw, $"This will clear the elapsed time!\nPress OK to clear, or Cancel to go back.", "Confirm reset", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-            });
+            mbr = MessageBoxEx.Show($"This will clear the elapsed time!\nPress OK to clear, or Cancel to go back.", "Confirm reset", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            
             if (mbr == MessageBoxResult.Yes)
             {
                 // quickly backup the elapsed time if we want to undo...

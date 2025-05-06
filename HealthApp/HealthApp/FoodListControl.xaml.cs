@@ -1,9 +1,11 @@
-﻿
+﻿/*
+ * HealthApp - Daniel Green (greend5@oregonstate.edu)
+ * CS361, Spring 2025
+ */
+
 using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-
 
 namespace HealthApp
 {

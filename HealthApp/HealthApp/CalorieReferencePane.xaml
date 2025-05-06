@@ -11,23 +11,43 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    
+
     <Grid>
-        <DockPanel
-            Margin="5"
-            VerticalAlignment="Top"
-            LastChildFill="False">
-            <TextBox
-                x:Name="usernameTextBox"
-                Width="300"
-                Height="24"
-                Margin="0,0,0,0"
-                VerticalAlignment="Center"
-                Style="{StaticResource placeHolderTextBox}"
-                Tag="Search for a food in list" />
-            <TextBlock ></TextBlock>
-            <ComboBox Name="userChoiceComboBox" DockPanel.Dock="Right" Width="200" Height="25" VerticalAlignment="Center" Text="Cate"></ComboBox>
-        </DockPanel>
-        <local:FoodListControl x:Name="foodList" />
+        <StackPanel Orientation="Vertical">
+            <DockPanel
+                Margin="5"
+                VerticalAlignment="Top"
+                LastChildFill="False">
+                <TextBox
+                    x:Name="searchTextBox"
+                    Width="300"
+                    Height="30"
+                    Margin="0,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Style="{StaticResource placeHolderTextBox}"
+                    Tag="Search for a food in list" />
+                <TextBlock />
+                <Button
+                    x:Name="searchButton"
+                    Width="32"
+                    Height="32"
+                    Margin="5,0,0,0"
+                    HorizontalAlignment="Center"
+                    Click="SearchButton_Click">
+                    <Image Source="/Assets/searchIcon.png" />
+                </Button>
+                <ComboBox
+                    Name="userChoiceComboBox"
+                    Width="200"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    DockPanel.Dock="Right"
+                    FontSize="18"
+                    SelectionChanged="foodComboBox_SelectionChanged"
+                    Text="Cate" />
+            </DockPanel>
+            <local:FoodListControl x:Name="foodList" />
+        </StackPanel>
     </Grid>
 </UserControl>

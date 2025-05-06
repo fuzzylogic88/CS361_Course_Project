@@ -24,6 +24,7 @@
     <None Remove="Assets\FoodImages\water.jpg" />
     <None Remove="Assets\pauseIcon.png" />
     <None Remove="Assets\playIcon.png" />
+    <None Remove="Assets\searchIcon.png" />
     <None Remove="Assets\timerIcon.png" />
     <None Remove="Assets\undoIcon.png" />
     <None Remove="encouragement.json" />
@@ -72,6 +73,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\playIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\searchIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\timerIcon.png">

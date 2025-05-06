@@ -1,4 +1,7 @@
-﻿
+﻿/*
+ * HealthApp - Daniel Green (greend5@oregonstate.edu)
+ * CS361, Spring 2025
+ */
 
 using System.Windows;
 using System.Windows.Controls;

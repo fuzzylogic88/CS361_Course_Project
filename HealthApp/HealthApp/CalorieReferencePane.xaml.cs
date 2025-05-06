@@ -4,7 +4,9 @@
  */
 
 using HealthApp.ViewModels;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -15,50 +17,32 @@ namespace HealthApp
     /// </summary>
     public partial class CalorieReferencePane : UserControl
     {
-        public static List<string> FoodList = [];
         public readonly string food_fname = "foodinfo.txt";
-        private MainViewModel mv;
 
         public CalorieReferencePane()
         {
             InitializeComponent();
 
-            Task.Factory.StartNew(() =>
+            ObservableCollection<FoodEntryControl> fEntries = [];
+
+            List<string> fdata = [.. File.ReadAllLines(food_fname)];
+            if (fdata.Count > 0)
             {
-                List<string> fdata = [.. File.ReadAllLines(food_fname)];
-                if (fdata.Count > 0)
+                HashSet<string> s = GetFoodCategories(fdata);
+                fEntries = GetFoodEntries(fdata);
+
+                // apply bindingSource to list control
+                if (fEntries.Count > 0)
                 {
-                    HashSet<string> s = GetFoodCategories(fdata);
-                    List<FoodEntryControl> fEntries = GetFoodEntries(fdata);
-
-                    // apply bindingSource to list control
-                    if (fEntries.Count > 0)
-                    {
-                        foodList.ItemsSource = fEntries;
-                    }
-
-                    // add categories
-                    foreach(string cat in s)
-                    {
-                        userChoiceComboBox.Items.Add(cat);
-                    }
+                    foodList.ItemsSource = fEntries;
                 }
-            });
-            
-            var foods = new List<FoodEntryControl>()
-            {
-                new() {
-                    ImageSource = new BitmapImage(new Uri("/Assets/FoodImages/burger.png", UriKind.Relative)),
-                    FoodName = "Burger",
-                    Description = "Burger text description"
-                },
-                new() {
-                    ImageSource = new BitmapImage(new Uri("/Assets/FoodImages/burrito.png", UriKind.Relative)),
-                    FoodName = "Burrito",
-                    Description = "Burrito text description"
-                },
-            };
-            foodList.ItemsSource = foods;
+
+                // add categories
+                foreach (string cat in s)
+                {
+                    userChoiceComboBox.Items.Add(cat);
+                }
+            }
         }
 
         /// <summary>
@@ -66,7 +50,7 @@ namespace HealthApp
         /// </summary>
         /// <param name="fdata"></param>
         /// <returns></returns>
-        public HashSet<string> GetFoodCategories(List<string> fdata)
+        public static HashSet<string> GetFoodCategories(List<string> fdata)
         {
             HashSet<string> strings = new();
             foreach (string f in fdata)
@@ -80,10 +64,10 @@ namespace HealthApp
             }
             return strings;
         }
-        
-        public List<FoodEntryControl> GetFoodEntries(List<string> fdata)
+
+        public static ObservableCollection<FoodEntryControl> GetFoodEntries(List<string> fdata)
         {
-            List<FoodEntryControl> fColl = new();
+            ObservableCollection<FoodEntryControl> fColl = [];
             foreach (string f in fdata)
             {
                 string[] split = f.Split(",");
@@ -93,7 +77,7 @@ namespace HealthApp
                     {
                         FoodEntryControl foodEntryControl = new()
                         {
-                            Name = split[0],
+                            FoodName = split[0],
                             Description = split[1],
                             ImageSource = new BitmapImage(new Uri(split[2], UriKind.Relative))
                         };
@@ -105,39 +89,122 @@ namespace HealthApp
             return fColl;
         }
 
-        public bool FoodExists(string name)
+        /// <summary>
+        /// Sorts foods by name
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            try
+            string query = searchTextBox.Text;
+            if (!string.IsNullOrEmpty(query))
             {
-                List<string> accountCollection = [.. File.ReadAllLines(account_fname)];
-                foreach (string account in accountCollection)
+                List<FoodEntryControl> sortedList = [];
+
+                List<string> fdata = [.. File.ReadAllLines(food_fname)];
+                if (fdata.Count > 0)
                 {
-                    string[] split = account.Split(',');
-                    if (split.Length == 2)
+                    foreach (string f in fdata)
                     {
-                        if (split[0] == user && pass == string.Empty)
+                        string[] split = f.Split(",");
+
+                        // match category and add to list
+                        if (split[0].Contains(query, StringComparison.OrdinalIgnoreCase) || query.Contains(split[0], StringComparison.OrdinalIgnoreCase))
                         {
-                            return true;
+                            sortedList.Add(new FoodEntryControl()
+                            {
+                                FoodName = split[0],
+                                Description = split[1],
+                                ImageSource = new BitmapImage(new Uri(split[2], UriKind.Relative))
+                            });
                         }
-                        else if (split[0] == user && !string.IsNullOrEmpty(pass))
+                    }
+                }
+                if (sortedList.Count > 0)
+                {
+                    foodList.ItemsSource = null;
+                    foodList.ItemsSource = sortedList;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sorts foods by category
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void foodComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<FoodEntryControl> sortedList = [];
+            var cBox = sender as ComboBox;
+            if (cBox != null)
+            {
+                string selectedItemText = (string)cBox.SelectedItem;
+                if (!string.IsNullOrEmpty(selectedItemText))
+                {
+                    List<string> fdata = [.. File.ReadAllLines(food_fname)];
+                    if (fdata.Count > 0)
+                    {
+                        foreach (string f in fdata)
                         {
-                            if (split[1] == pass)
+                            string[] split = f.Split(",");
+
+                            // match category and add to list
+                            if (split[3].Equals(selectedItemText, StringComparison.OrdinalIgnoreCase))
                             {
-                                return true;
-                            }
-                            else
-                            {
-                                return false;
+                                sortedList.Add(new FoodEntryControl()
+                                {
+                                    FoodName = split[0],
+                                    Description = split[1],
+                                    ImageSource = new BitmapImage(new Uri(split[2], UriKind.Relative))
+                                });
                             }
                         }
                     }
                 }
-                return false;
             }
-            catch
+            if (sortedList.Count > 0)
             {
-                return false;
+                foodList.ItemsSource = null;
+                foodList.ItemsSource = sortedList;
             }
         }
+
+
+
+        //public bool FoodExists(string name)
+        //{
+        //    try
+        //    {
+        //        List<string> accountCollection = [.. File.ReadAllLines(account_fname)];
+        //        foreach (string account in accountCollection)
+        //        {
+        //            string[] split = account.Split(',');
+        //            if (split.Length == 2)
+        //            {
+        //                if (split[0] == user && pass == string.Empty)
+        //                {
+        //                    return true;
+        //                }
+        //                else if (split[0] == user && !string.IsNullOrEmpty(pass))
+        //                {
+        //                    if (split[1] == pass)
+        //                    {
+        //                        return true;
+        //                    }
+        //                    else
+        //                    {
+        //                        return false;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        return false;
+        //    }
+        //    catch
+        //    {
+        //        return false;
+        //    }
+        //}
     }
 }
