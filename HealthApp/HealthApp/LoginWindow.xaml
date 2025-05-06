@@ -7,10 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="clr-namespace:HealthApp.ViewModels"
     xmlns:vm="clr-namespace:HealthApp.ViewModels"
+    d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
     Title="HealthApp - Login"
     Width="800"
     Height="450"
-    d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
     mc:Ignorable="d">
 
     <Window.DataContext>
