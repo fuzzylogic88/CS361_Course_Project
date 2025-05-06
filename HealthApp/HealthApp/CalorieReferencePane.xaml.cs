@@ -3,6 +3,8 @@
  * CS361, Spring 2025
  */
 
+using HealthApp.ViewModels;
+using System.IO;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -15,11 +17,33 @@ namespace HealthApp
     {
         public static List<string> FoodList = [];
         public readonly string food_fname = "foodinfo.txt";
+        private MainViewModel mv;
 
         public CalorieReferencePane()
         {
             InitializeComponent();
 
+            Task.Factory.StartNew(() =>
+            {
+                List<string> fdata = [.. File.ReadAllLines(food_fname)];
+                if (fdata.Count > 0)
+                {
+                    HashSet<string> s = GetFoodCategories(fdata);
+                    List<FoodEntryControl> fEntries = GetFoodEntries(fdata);
+
+                    // apply bindingSource to list control
+                    if (fEntries.Count > 0)
+                    {
+                        foodList.ItemsSource = fEntries;
+                    }
+
+                    // add categories
+                    foreach(string cat in s)
+                    {
+                        userChoiceComboBox.Items.Add(cat);
+                    }
+                }
+            });
             
             var foods = new List<FoodEntryControl>()
             {
@@ -37,9 +61,48 @@ namespace HealthApp
             foodList.ItemsSource = foods;
         }
 
-        public void GetFoodCategories()
+        /// <summary>
+        ///  Returns a unique list of categories from file data read earlier
+        /// </summary>
+        /// <param name="fdata"></param>
+        /// <returns></returns>
+        public HashSet<string> GetFoodCategories(List<string> fdata)
         {
-
+            HashSet<string> strings = new();
+            foreach (string f in fdata)
+            {
+                string[] split = f.Split(',');
+                // idx 0: name, 1: desc, 2: image source, 3: category
+                if (!string.IsNullOrEmpty(split[3]))
+                {
+                    strings.Add(split[3]);
+                }
+            }
+            return strings;
+        }
+        
+        public List<FoodEntryControl> GetFoodEntries(List<string> fdata)
+        {
+            List<FoodEntryControl> fColl = new();
+            foreach (string f in fdata)
+            {
+                string[] split = f.Split(",");
+                if (!string.IsNullOrEmpty(split[0]) && !string.IsNullOrEmpty(split[1]))
+                {
+                    try
+                    {
+                        FoodEntryControl foodEntryControl = new()
+                        {
+                            Name = split[0],
+                            Description = split[1],
+                            ImageSource = new BitmapImage(new Uri(split[2], UriKind.Relative))
+                        };
+                        fColl.Add(foodEntryControl);
+                    }
+                    catch { /*eat this, probably a bad file location*/}
+                }
+            }
+            return fColl;
         }
 
         public bool FoodExists(string name)
