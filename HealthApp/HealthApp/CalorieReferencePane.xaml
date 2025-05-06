@@ -42,6 +42,15 @@
                 Click="SearchButton_Click">
                 <Image Source="/Assets/searchIcon.png" />
             </Button>
+            <Button
+                x:Name="undoButton"
+                Width="32"
+                Height="32"
+                Margin="5,0,0,0"
+                HorizontalAlignment="Center"
+                Click="UndoButton_Click">
+                <Image Source="/Assets/undoIcon.png" />
+            </Button>
             <ComboBox
                 Name="userChoiceComboBox"
                 Width="200"

@@ -103,7 +103,6 @@ namespace HealthApp
             {
                 Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    LoginWindow? lw = Application.Current.MainWindow as LoginWindow;
                     MessageBoxEx.Show(this, $"User name is not associated with an account!\nPress 'Register to add {user} as a new user.", "User not registered.", MessageBoxButton.OK, MessageBoxImage.Information);
                 });
             }
@@ -111,7 +110,6 @@ namespace HealthApp
             {
                 Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    LoginWindow? lw = Application.Current.MainWindow as LoginWindow;
                     MessageBoxEx.Show(this, $"Bad credentials! Try again.", "Invalid credentials.", MessageBoxButton.OK, MessageBoxImage.Error);
                 });
             }
@@ -138,7 +136,6 @@ namespace HealthApp
                 {
                     Application.Current.Dispatcher.InvokeAsync(() =>
                     {
-                        LoginWindow? lw = Application.Current.MainWindow as LoginWindow;
                         MessageBoxEx.Show(this, $"User added.\nPlease log in.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
                     });
                 }
@@ -146,7 +143,6 @@ namespace HealthApp
                 {
                     Application.Current.Dispatcher.InvokeAsync(() =>
                     {
-                        LoginWindow? lw = Application.Current.MainWindow as LoginWindow;
                         MessageBoxEx.Show(this, $"Failed to add user!\nCheck input and account filepath.", "Registration error!", MessageBoxButton.OK, MessageBoxImage.Error);
                     });
                 }
@@ -155,7 +151,6 @@ namespace HealthApp
             {
                 Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    LoginWindow? lw = Application.Current.MainWindow as LoginWindow;
                     MessageBoxEx.Show(this, $"User added.\nPlease log in.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
                 });
             }
@@ -194,14 +189,6 @@ namespace HealthApp
                             {
                                 return true;
                             }
-                            else
-                            {
-                                return false;
-                            }
-                        }
-                        else
-                        {
-                            return false;
                         }
                     }
                 }

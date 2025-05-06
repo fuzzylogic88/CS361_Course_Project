@@ -167,8 +167,26 @@ namespace HealthApp
             }
             if (sortedList.Count > 0)
             {
-                foodList.ItemsSource = null;
                 foodList.ItemsSource = sortedList;
+            }
+        }
+
+        private void UndoButton_Click(object sender, RoutedEventArgs e)
+        {
+            ObservableCollection<FoodEntryControl> fEntries = [];
+
+            List<string> fdata = [.. File.ReadAllLines(food_fname)];
+            if (fdata.Count > 0)
+            {
+                fEntries = GetFoodEntries(fdata);
+
+                // apply bindingSource to list control
+                if (fEntries.Count > 0)
+                {
+                    searchTextBox.Text = string.Empty;
+                    userChoiceComboBox.SelectedIndex = -1;
+                    foodList.ItemsSource = fEntries;
+                }
             }
         }
     }

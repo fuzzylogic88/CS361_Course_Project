@@ -23,6 +23,10 @@ namespace HealthApp
             if (guest)
             {
                 this.Title = "HealthApp - Guest";
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    MessageBoxEx.Show(this, "Running in GUEST mode.\nPersonal data will not be retained.", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                });
             }
             else
             {
