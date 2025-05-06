@@ -4,6 +4,7 @@
  */
 
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace HealthApp
 {
@@ -15,6 +16,14 @@ namespace HealthApp
         public CalorieReferencePane()
         {
             InitializeComponent();
+
+            //var foods = new List<ImageTextItem>()
+            //{
+            //    new() {
+            //        Image = new BitmapImage(new Uri("/Assets/FoodImages/burger.png", UriKind.Relative)),
+            //        Text = "Burger info goes here"
+            //    },
+            //};
         }
     }
 }

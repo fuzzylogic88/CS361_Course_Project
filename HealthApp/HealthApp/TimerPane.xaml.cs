@@ -18,6 +18,7 @@ namespace HealthApp
     {
         private readonly Dispatcher _dispatcher;
         public static Stopwatch paneTimer = new();
+        private TimeSpan savedElapsed;
 
         public TimerPane()
         {
@@ -63,12 +64,35 @@ namespace HealthApp
 
         private void UndoResetButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (savedElapsed.TotalMicroseconds > 0)
+            {
+                //paneTimer.
+                //paneTimer.Elapsed = savedElapsed;
+            }
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            MessageBoxResult mbr = new();
+            Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                LoginWindow? lw = Application.Current.MainWindow as LoginWindow;
+                mbr = MessageBoxEx.Show(lw, $"This will clear the elapsed time!\nPress OK to clear, or Cancel to go back.", "Confirm reset", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            });
+            if (mbr == MessageBoxResult.Yes)
+            {
+                // quickly backup the elapsed time if we want to undo...
+                savedElapsed = paneTimer.Elapsed;
+
+                if (paneTimer.IsRunning)
+                {
+                    paneTimer.Restart();
+                }
+                else
+                {
+                    paneTimer.Reset();
+                }
+            }
         }
 
         private void SetButton_Click(object sender, RoutedEventArgs e)

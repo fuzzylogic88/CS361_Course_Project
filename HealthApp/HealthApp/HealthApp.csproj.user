@@ -8,6 +8,12 @@
     <Compile Update="DefaultView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="FoodEntryControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="FoodListControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="LoginWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

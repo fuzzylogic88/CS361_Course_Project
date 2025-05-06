@@ -13,6 +13,15 @@
     <None Remove="accounts.txt" />
     <None Remove="Assets\appicon.png" />
     <None Remove="Assets\default_bg.jpg" />
+    <None Remove="Assets\FoodImages\burger.png" />
+    <None Remove="Assets\FoodImages\burrito.jpg" />
+    <None Remove="Assets\FoodImages\coffee.jpg" />
+    <None Remove="Assets\FoodImages\cremebrulee.jpg" />
+    <None Remove="Assets\FoodImages\icecream.jpg" />
+    <None Remove="Assets\FoodImages\juice.jpg" />
+    <None Remove="Assets\FoodImages\sherbet.jpg" />
+    <None Remove="Assets\FoodImages\waffles.jpg" />
+    <None Remove="Assets\FoodImages\water.jpg" />
     <None Remove="Assets\pauseIcon.png" />
     <None Remove="Assets\playIcon.png" />
     <None Remove="Assets\timerIcon.png" />
@@ -29,6 +38,33 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\default_bg.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\FoodImages\burger.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\FoodImages\burrito.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\FoodImages\coffee.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\FoodImages\cremebrulee.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\FoodImages\icecream.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\FoodImages\juice.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\FoodImages\sherbet.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\FoodImages\waffles.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\FoodImages\water.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\pauseIcon.png">
