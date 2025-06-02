@@ -66,6 +66,7 @@ namespace HealthApp.ViewModels
         {
             CurrentPane = paneType switch
             {
+                "data" => new DataViewPane(),
                 "timer" => new TimerPane(),
                 "calorie" => new CalorieReferencePane(),
                 "settings" => new SettingsPane(),

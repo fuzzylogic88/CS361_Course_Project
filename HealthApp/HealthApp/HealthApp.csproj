@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="accounts.txt" />
+    <None Remove="accounts.json" />
     <None Remove="Assets\appicon.png" />
     <None Remove="Assets\default_bg.jpg" />
     <None Remove="Assets\FoodImages\burger.png" />
@@ -40,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="accounts.txt">
+    <Content Include="accounts.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\appicon.ico" />
@@ -98,9 +98,6 @@
     <Content Include="ImageServer.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="login.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="LoginServer.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -136,6 +133,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="accounts.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

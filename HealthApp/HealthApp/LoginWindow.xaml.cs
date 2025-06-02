@@ -78,32 +78,58 @@ namespace HealthApp
             }
         }
 
-        private bool AccountExistsOnServer(string user, string pass)
+        private string AccountExistsOnServer(string user, string pass)
         {
-            // connect to microservice
-            using var client = new RequestSocket();
+            try
+            {
+                // connect to microservice
+                using var client = new RequestSocket();
 
-            client.Connect("tcp://127.0.0.1:5556");
-            client.SendFrame($"VERIFY,{user},{pass}");
+                client.Connect("tcp://127.0.0.1:5556");
+                if (pass == string.Empty)
+                {
+                    client.SendFrame($"VERIFY,{user}");
+                }
+                else
+                {
+                    client.SendFrame($"VERIFY,{user},{pass}");
+                }
 
-            var msg = client.ReceiveFrameString();
 
-            Console.WriteLine("From microservice: {0}", msg);
-            return true;
+
+                    var msg = client.ReceiveFrameString();
+
+                Console.WriteLine("From microservice: {0}", msg);
+                return msg;
+            }
+            catch (Exception ex)
+            {
+                MessageBoxEx.Show(ex.Message);
+                return "ERR";
+            }
         }
 
-        private bool AddAccountWithServer(string user, string pass)
+        private string AddAccountWithServer(string user, string pass)
         {
-            // connect to microservice
-            using var client = new RequestSocket();
 
-            client.Connect("tcp://127.0.0.1:5556");
-            client.SendFrame($"ADD,{user},{pass}");
+            try
+            {
+                // connect to microservice
+                using var client = new RequestSocket();
 
-            var msg = client.ReceiveFrameString();
+                client.Connect("tcp://127.0.0.1:5556");
+                client.SendFrame($"ADD,{user},{pass}");
 
-            Console.WriteLine("From microservice: {0}", msg);
-            return true;
+                var msg = client.ReceiveFrameString();
+
+                Console.WriteLine("From microservice: {0}", msg);
+                return msg;
+            }
+            catch (Exception ex)
+            {
+                MessageBoxEx.Show(ex.Message);
+                return "ERR";
+            }
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -111,20 +137,22 @@ namespace HealthApp
             string user = usernameTextBox.Text;
             string pass = passwordTextBox.Password;
 
-            if (AccountExistsOnServer(user, pass))
-            {
-                // successful login, pop up our main window
-                var mw = new MainWindow(false, user);
-                mw.Show();
-                this.Close();
-            }
-            else if (!AccountExistsOnServer(user, string.Empty))
+            if (AccountExistsOnServer(user, string.Empty) == "USER_UNREGISTERED_NO_PW")
             {
                 Application.Current.Dispatcher.InvokeAsync(() =>
                 {
                     MessageBoxEx.Show(this, $"User name is not associated with an account!\nPress 'Register to add {user} as a new user.", "User not registered.", MessageBoxButton.OK, MessageBoxImage.Information);
                 });
             }
+
+            else if (AccountExistsOnServer(user, pass) == "USER_REGISTERED_GOOD_PW")
+            {
+                // successful login, pop up our main window
+                var mw = new MainWindow(false, user);
+                mw.Show();
+                this.Close();
+            }
+
             else
             {
                 Application.Current.Dispatcher.InvokeAsync(() =>
@@ -132,7 +160,6 @@ namespace HealthApp
                     MessageBoxEx.Show(this, $"Bad credentials! Try again.", "Invalid credentials.", MessageBoxButton.OK, MessageBoxImage.Error);
                 });
             }
-            
         }
 
         private void GuestLoginButton_Click(object sender, RoutedEventArgs e)
@@ -148,10 +175,9 @@ namespace HealthApp
             string user = usernameTextBox.Text;
             string pass = passwordTextBox.Password;
 
-            if (!AccountExistsOnServer(user, string.Empty))
+            if (AccountExistsOnServer(user, string.Empty) == "USER_UNREGISTERED_NO_PW")
             {
-                bool addedOk = AddAccountWithServer(user, pass);
-                if (addedOk)
+                if (AddAccountWithServer(user, pass) == "USER_ADDED_OK")
                 {
                     Application.Current.Dispatcher.InvokeAsync(() =>
                     {
@@ -177,7 +203,7 @@ namespace HealthApp
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MicroserviceHelpers.StopMicroservices();
+            //MicroserviceHelpers.StopMicroservices();
         }
 
         // old code which uses text files to authenticate

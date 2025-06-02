@@ -3,7 +3,6 @@
 
 import zmq
 import requests
-from imageio.v2 import imread
 from os import system
 
 system("title Image Service")

@@ -12,6 +12,23 @@
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Orientation="Horizontal">
+        <Border
+            Margin="5,5,5,2.5"
+            Padding="5"
+            CornerRadius="10">
+            <Border.Background>
+                <SolidColorBrush Opacity="0.8" Color="Azure" />
+            </Border.Background>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <TextBlock
+                    Height="40"
+                    Margin="4,4,0,4"
+                    FontSize="24"
+                    Text="Download new background image"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+            </Grid>
+        </Border>
         <Button
             x:Name="ImageSelectButton"
             Width="64"

@@ -1,0 +1,10 @@
+{
+  "user": {
+    "password": "pass",
+    "personal_reminders": {
+      "entry1": "",
+      "entry2": "",
+      "entry3": ""
+    }
+  }
+}
