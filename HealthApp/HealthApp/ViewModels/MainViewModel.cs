@@ -68,6 +68,7 @@ namespace HealthApp.ViewModels
             {
                 "timer" => new TimerPane(),
                 "calorie" => new CalorieReferencePane(),
+                "settings" => new SettingsPane(),
                 _ => CurrentPane
             };
         }

@@ -11,24 +11,18 @@
     Background="Aqua"
     mc:Ignorable="d">
 
-    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
-        <Button
-            x:Name="PauseButton"
-            Width="32"
-            Height="32"
-            Margin="4,2,0,0"
-            HorizontalAlignment="Center"
-            Click="PauseButton_Click">
-            <Image Source="/Assets/pauseIcon.png" />
-        </Button>
+    <StackPanel
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Orientation="Horizontal">
         <Button
             x:Name="PlayButton"
-            Width="32"
-            Height="32"
-            Margin="4,2,0,0"
+            Width="64"
+            Height="64"
+            Margin="4,4,0,0"
             HorizontalAlignment="Center"
-            Click="PlayButton_Click">
-            <Image Source="/Assets/playIcon.png" />
+            Click="ImageSelectButton_Click">
+            <Image Source="/Assets/image.png" />
         </Button>
     </StackPanel>
 </Page>

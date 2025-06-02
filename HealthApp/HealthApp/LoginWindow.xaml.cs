@@ -6,7 +6,6 @@
 using HealthApp.ViewModels;
 using NetMQ;
 using NetMQ.Sockets;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows;
@@ -23,13 +22,19 @@ namespace HealthApp
 
         private readonly string account_fname = @"accounts.txt";
 
+        /// <summary>
+        /// Microservice python scripts in application directory
+        /// </summary>
+        private readonly string msg_scriptname = "UserMessageServer.py";
+        private readonly string login_scriptname = "LoginServer.py";
+
         public LoginWindow()
         {
             InitializeComponent();
 
-
-            string msg_scriptpath = "userMessageServer.py"; // in app directory
-
+            // spin up python apps
+            MicroserviceHelpers.StartPythonScript(msg_scriptname);
+            MicroserviceHelpers.StartPythonScript(login_scriptname);
 
             DataContext = new MainViewModel();
 
@@ -39,8 +44,6 @@ namespace HealthApp
             {
                 versionTextLabel.Content = "v" + ver.ToString();
             }
-
-            // set up task for user message microservice
 
             MainViewModel viewModel = (MainViewModel)this.DataContext;
             viewModel.UserMessageLabelText = "Loading message...";

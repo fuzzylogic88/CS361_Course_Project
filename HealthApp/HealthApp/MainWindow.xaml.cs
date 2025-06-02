@@ -14,6 +14,9 @@ namespace HealthApp
     public partial class MainWindow : Window
     {
         private MainViewModel mv;
+
+        private readonly string image_scriptname = "ImageServer.py";
+
         public MainWindow(bool guest, string username)
         {
             InitializeComponent();
@@ -32,11 +35,14 @@ namespace HealthApp
             {
                 this.Title = $"HealthApp - {username}";
             }
+
+            // Spin up Image server to wait for request
+            MicroserviceHelpers.StartPythonScript(image_scriptname);
         }
 
         private void SettingsPaneButton_Click(object sender, RoutedEventArgs e)
         {
-
+            mv.SwitchPaneCommand.Execute("settings");
         }
 
         private void TimerPaneButton_Click(object sender, RoutedEventArgs e)
