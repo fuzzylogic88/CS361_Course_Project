@@ -3,8 +3,12 @@
  * CS361, Spring 2025
  */
 
+using HealthApp.Properties;
 using HealthApp.ViewModels;
+using System.IO;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace HealthApp
 {
@@ -22,6 +26,22 @@ namespace HealthApp
             InitializeComponent();
             mv = new MainViewModel();
             DataContext = mv;
+
+            // Check for local, last-user-configured background and apply if available
+            if (!String.IsNullOrEmpty(Settings.Default.UserBackgroundSource) && File.Exists(Settings.Default.UserBackgroundSource))
+            {
+                // file exists and is configured, apply to app background!
+                ImageSource isrc = new BitmapImage(new Uri(Settings.Default.UserBackgroundSource));
+                ImageBrush ib = new(isrc);
+                MainContentBackground.Background = ib;
+            }
+            // otherwise, use default background file
+            else
+            {
+                ImageSource isrc = new BitmapImage(new Uri("/Assets/default_bg.jpg"));
+                ImageBrush ib = new(isrc);
+                MainContentBackground.Background = ib;           
+            }
 
             if (guest)
             {

@@ -77,10 +77,7 @@
         </UniformGrid>
 
         <!--  Main Content  -->
-        <Grid x:Name="MainContent" Margin="200,0,0,0">
-            <Grid.Background>
-                <ImageBrush ImageSource="/Assets/default_bg.jpg" />
-            </Grid.Background>
+        <Grid x:Name="MainContentBackground" Margin="200,0,0,0">
             <ContentControl Content="{Binding CurrentPane}" />
         </Grid>
     </Grid>
