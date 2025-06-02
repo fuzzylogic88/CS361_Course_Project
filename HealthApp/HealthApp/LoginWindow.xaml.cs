@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Threading;
 
 namespace HealthApp
@@ -77,19 +78,47 @@ namespace HealthApp
             }
         }
 
+        private bool AccountExistsOnServer(string user, string pass)
+        {
+            // connect to microservice
+            using var client = new RequestSocket();
+
+            client.Connect("tcp://127.0.0.1:5556");
+            client.SendFrame($"VERIFY,{user},{pass}");
+
+            var msg = client.ReceiveFrameString();
+
+            Console.WriteLine("From microservice: {0}", msg);
+            return true;
+        }
+
+        private bool AddAccountWithServer(string user, string pass)
+        {
+            // connect to microservice
+            using var client = new RequestSocket();
+
+            client.Connect("tcp://127.0.0.1:5556");
+            client.SendFrame($"ADD,{user},{pass}");
+
+            var msg = client.ReceiveFrameString();
+
+            Console.WriteLine("From microservice: {0}", msg);
+            return true;
+        }
+
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             string user = usernameTextBox.Text;
             string pass = passwordTextBox.Password;
 
-            if (AccountExists(user, pass))
+            if (AccountExistsOnServer(user, pass))
             {
                 // successful login, pop up our main window
                 var mw = new MainWindow(false, user);
                 mw.Show();
                 this.Close();
             }
-            else if (!AccountExists(user, string.Empty))
+            else if (!AccountExistsOnServer(user, string.Empty))
             {
                 Application.Current.Dispatcher.InvokeAsync(() =>
                 {
@@ -119,9 +148,9 @@ namespace HealthApp
             string user = usernameTextBox.Text;
             string pass = passwordTextBox.Password;
 
-            if (!AccountExists(user, string.Empty))
+            if (!AccountExistsOnServer(user, string.Empty))
             {
-                bool addedOk = AddAccount(user, pass);
+                bool addedOk = AddAccountWithServer(user, pass);
                 if (addedOk)
                 {
                     Application.Current.Dispatcher.InvokeAsync(() =>
@@ -146,6 +175,13 @@ namespace HealthApp
             }
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MicroserviceHelpers.StopMicroservices();
+        }
+
+        // old code which uses text files to authenticate
+        /*
         public bool AddAccount(string user, string pass)
         {
             if (!string.IsNullOrEmpty(user) && !string.IsNullOrEmpty(pass))
@@ -189,5 +225,6 @@ namespace HealthApp
                 return false;
             }
         }
+        */
     }
 }
