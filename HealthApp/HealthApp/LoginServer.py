@@ -1,9 +1,12 @@
 # Microservice facilitating user login/authentication
 # Author: Daniel Green (greend5@oregonstate.edu)
 
+from os import system
 import datetime
 import zmq
 import json
+
+system("title Login Service")
 
 context = zmq.Context()
 socket = context.socket(zmq.REP)

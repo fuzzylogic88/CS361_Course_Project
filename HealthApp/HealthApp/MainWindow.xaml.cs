@@ -21,27 +21,15 @@ namespace HealthApp
 
         private readonly string image_scriptname = "ImageServer.py";
 
+        public static System.Windows.Controls.Grid? bgContentGrid;
+
         public MainWindow(bool guest, string username)
         {
             InitializeComponent();
             mv = new MainViewModel();
             DataContext = mv;
 
-            // Check for local, last-user-configured background and apply if available
-            if (!String.IsNullOrEmpty(Settings.Default.UserBackgroundSource) && File.Exists(Settings.Default.UserBackgroundSource))
-            {
-                // file exists and is configured, apply to app background!
-                ImageSource isrc = new BitmapImage(new Uri(Settings.Default.UserBackgroundSource));
-                ImageBrush ib = new(isrc);
-                MainContentBackground.Background = ib;
-            }
-            // otherwise, use default background file
-            else
-            {
-                ImageSource isrc = new BitmapImage(new Uri("/Assets/default_bg.jpg"));
-                ImageBrush ib = new(isrc);
-                MainContentBackground.Background = ib;           
-            }
+            bgContentGrid = MainContentBackground;
 
             if (guest)
             {
@@ -58,6 +46,63 @@ namespace HealthApp
 
             // Spin up Image server to wait for request
             MicroserviceHelpers.StartPythonScript(image_scriptname);
+        }
+
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await LoadBackgroundImage();
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MicroserviceHelpers.StopMicroservices();
+        }
+
+        private static async Task LoadBackgroundImage()
+        {
+            try
+            {
+                if (bgContentGrid != null)
+                {
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        // Check for local, last-user-configured background and apply if available
+                        if (!String.IsNullOrEmpty(Settings.Default.UserBackgroundSource) && File.Exists(Settings.Default.UserBackgroundSource))
+                        {
+                            // file exists and is configured, apply to app background!
+                            byte[] img = File.ReadAllBytes(Settings.Default.UserBackgroundSource);
+
+                            using var ms = new MemoryStream(img);
+                            BitmapImage bmp = new();
+                            bmp.BeginInit();
+                            bmp.StreamSource = ms;
+                            bmp.CacheOption = BitmapCacheOption.OnLoad;
+                            bmp.EndInit();
+                            bmp.Freeze();
+
+                            ImageBrush ib = new()
+                            {
+                                ImageSource = bmp,
+                                Stretch = Stretch.UniformToFill
+                            };
+
+                            bgContentGrid.Background = ib;
+                        }
+
+                        // otherwise, use default background file
+                        else
+                        {
+                            ImageSource isrc = new BitmapImage(new Uri(@"Assets/default_bg.jpg", UriKind.Relative));
+                            ImageBrush ib = new(isrc);
+                            bgContentGrid.Background = ib;
+                        }
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBoxEx.Show(ex.Message);
+            }
         }
 
         private void SettingsPaneButton_Click(object sender, RoutedEventArgs e)

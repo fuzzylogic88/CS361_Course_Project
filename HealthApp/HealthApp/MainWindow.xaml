@@ -8,6 +8,8 @@
     Title="HealthApp"
     Width="800"
     Height="450"
+    Closing="MainWindow_Closing"
+    Loaded="MainWindow_Loaded"
     mc:Ignorable="d">
     <Grid>
         <!--  Sidebar using UniformGrid  -->
@@ -77,7 +79,7 @@
         </UniformGrid>
 
         <!--  Main Content  -->
-        <Grid x:Name="MainContentBackground" Margin="200,0,0,0">
+        <Grid Name="MainContentBackground" Margin="200,0,0,0">
             <ContentControl Content="{Binding CurrentPane}" />
         </Grid>
     </Grid>

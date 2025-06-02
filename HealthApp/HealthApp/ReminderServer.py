@@ -1,9 +1,12 @@
 # Microservice which delivers configured reminders to the main window
 # Author: Daniel Green (greend5@oregonstate.edu)
 
+from os import system
 import datetime
 import zmq
 import json
+
+system("title Reminder Service")
 
 context = zmq.Context()
 socket = context.socket(zmq.REP)

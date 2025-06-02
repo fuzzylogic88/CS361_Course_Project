@@ -12,6 +12,8 @@ namespace HealthApp
 {
     internal class MicroserviceHelpers
     {
+        public static List<Process> RunningMicroservices = new();
+
         public static readonly string pypath = @"C:/Python313/python.exe";
 
         /// <summary>
@@ -30,7 +32,22 @@ namespace HealthApp
                 CreateNoWindow = false,
             };
             var msgProc = new Process { StartInfo = processInfo };
+            RunningMicroservices.Add(msgProc);
+
             msgProc.Start();
+        }
+
+        /// <summary>
+        /// Terminates any running python scripts on app exit
+        /// </summary>
+        public static void StopMicroservices()
+        {
+            foreach (Process p in RunningMicroservices)
+            {
+                if (!p.HasExited) {
+                    p.Kill(true);
+                }
+            }
         }
     }
 }

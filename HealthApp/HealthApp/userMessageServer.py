@@ -1,8 +1,11 @@
 # Microservice itself that upon request, sends an encouraging message to the client
 
+from os import system
 import datetime
 import zmq
 import json
+
+system("title Encouragement Service")
 
 context = zmq.Context()
 socket = context.socket(zmq.REP)

@@ -3,8 +3,10 @@
 
 import zmq
 import requests
-import base64
-from imageio import imread
+from imageio.v2 import imread
+from os import system
+
+system("title Image Service")
 
 ACCESS_KEY = "k7uShp7l2QVykqSp-n7F6gU42uj2gU4uQPz9rihEGqo"
 
@@ -33,16 +35,15 @@ while True:
 
         # download photo at URL
         print("downloading image...")
-        image = imread(image_location)
-        
-        # base64 encode image data before transmission
-        print("encoding data...")
-        bytes = bytearray(image)
-        b64_str = base64.b64encode(bytes)
-        socket.send(b64_str)
+        img_response = requests.get(image_location)
+        image_bytes = img_response.content
+
+        # transmit byte array
+        bytes = bytearray(image_bytes)
+        socket.send(bytes)
+
         print("image data sent!")
 
     except Exception as ex:
-        socket.send_string("QUERY_FAIL")
         print(ex)
         continue

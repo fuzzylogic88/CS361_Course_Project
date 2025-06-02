@@ -6,6 +6,7 @@
 using HealthApp.ViewModels;
 using NetMQ;
 using NetMQ.Sockets;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows;

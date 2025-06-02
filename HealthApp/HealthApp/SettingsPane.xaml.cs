@@ -3,14 +3,16 @@
  * CS361, Spring 2025
  */
 
+using HealthApp.Properties;
 using HealthApp.ViewModels;
 using NetMQ;
 using NetMQ.Sockets;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using Image = System.Drawing.Image;
 
 namespace HealthApp
 {
@@ -20,12 +22,12 @@ namespace HealthApp
     public partial class SettingsPane : UserControl
     {
         private Dispatcher _dispatcher;
-
+        private static readonly string image_dest = @"Assets/user_background.png";
         public SettingsPane()
         {
             InitializeComponent();
         }
-        public void ImageSelectButton_Click()
+        public void ImageSelectButton_Click(object sender, RoutedEventArgs e)
         {
             MainViewModel viewModel = (MainViewModel)this.DataContext;
             _dispatcher = Application.Current.Dispatcher;
@@ -38,39 +40,55 @@ namespace HealthApp
 
         private static async Task BackgroundImageTask(MainViewModel vm, Dispatcher dispatcher)
         {
-            // connect to microservice
-            using var client = new RequestSocket();
-
-            client.Connect("tcp://127.0.0.1:5557");
-            client.SendFrame("IMG");
-
-            // get a base64 encoded image data from the microservice
-            var msg = client.ReceiveFrameString();
-
-            // decode and save to file, in application folder.
-            Image new_img = B64StringToImage(msg);
-
-            // save file locally for later use
-            new_img.Save("user_background.png", System.Drawing.Imaging.ImageFormat.Png);
-
-
-            if (!dispatcher.HasShutdownStarted)
+            try
             {
+                // connect to microservice
+                using var client = new RequestSocket();
+
+                client.Connect("tcp://127.0.0.1:5557");
+                client.SendFrame("IMG");
+
+                // get byte array data from microservice
+                byte[] img = client.ReceiveFrameBytes();
+
+                BitmapImage bmp = new();
+                using (var ms = new MemoryStream(img))
+                {
+                    bmp.BeginInit();
+                    bmp.CacheOption = BitmapCacheOption.OnLoad;
+                    bmp.StreamSource = ms;
+                    bmp.EndInit();
+                    bmp.Freeze();
+                }
+
                 await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    // update label with message we received
-                    vm.UserMessageLabelText = new string($"{msg}");
+                    // save file locally for later use
+                    JpegBitmapEncoder enc = new();
+                    enc.Frames.Add(BitmapFrame.Create(bmp));
+
+                    using var fstream = new FileStream(image_dest, FileMode.Create);
+                    enc.Save(fstream);
+
+                    Settings.Default.UserBackgroundSource = image_dest;
+                    Settings.Default.Save();
+
+                    // finally, apply the new background to the UI
+                    if (!dispatcher.HasShutdownStarted)
+                    {
+
+                        ImageBrush ib = new()
+                        {
+                            ImageSource = bmp,
+                            Stretch = Stretch.UniformToFill
+                        };
+                        MainWindow.bgContentGrid.Background = ib;
+                    }
                 });
             }
-        }
-
-        private static Image B64StringToImage(string b64_str)
-        {
-            byte[] img = Convert.FromBase64String(b64_str);
-            using (var ms = new MemoryStream(img, 0, img.Length))
+            catch (Exception ex)
             {
-                Image image = Image.FromStream(ms);
-                return image;
+                MessageBoxEx.Show(ex.Message);
             }
         }
     }
