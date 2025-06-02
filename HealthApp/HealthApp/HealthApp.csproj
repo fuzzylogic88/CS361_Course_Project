@@ -32,6 +32,10 @@
     <None Remove="Assets\undoIcon.png" />
     <None Remove="encouragement.json" />
     <None Remove="foodinfo.txt" />
+    <None Remove="ImageServer.py" />
+    <None Remove="LoginServer.py" />
+    <None Remove="ReminderServer.py" />
+    <None Remove="userMessageServer.py" />
   </ItemGroup>
 
   <ItemGroup>
@@ -87,7 +91,13 @@
     <Content Include="Assets\undoIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ImageServer.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="login.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LoginServer.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="reminders.json">
@@ -99,26 +109,17 @@
     <Content Include="foodinfo.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ReminderServer.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="UserMessageServer.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="NetMQ" Version="4.0.1.14" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="ImageServer.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="ReminderServer.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="LoginServer.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="userMessageServer.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

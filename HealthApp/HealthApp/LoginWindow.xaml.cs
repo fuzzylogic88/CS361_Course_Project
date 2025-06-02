@@ -27,23 +27,9 @@ namespace HealthApp
         {
             InitializeComponent();
 
-            /*
-             *  Start Python microservice to provide us a user message
-             */
-            string pypath = @"C:/Python313/python.exe";
-            string scriptpath = "userMessageServer.py"; // in app directory
 
-            var processInfo = new ProcessStartInfo
-            {
-                FileName = pypath,
-                Arguments = $"\"{scriptpath}\"",  // Properly quoted in case of spaces
-                WorkingDirectory = Path.GetDirectoryName(scriptpath), // Set working directory
-                UseShellExecute = false,
-                WindowStyle = ProcessWindowStyle.Normal,
-                CreateNoWindow = false,
-            };
-            var msgProc = new Process { StartInfo = processInfo };
-            msgProc.Start();
+            string msg_scriptpath = "userMessageServer.py"; // in app directory
+
 
             DataContext = new MainViewModel();
 
