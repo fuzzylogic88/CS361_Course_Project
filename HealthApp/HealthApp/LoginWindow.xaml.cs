@@ -94,10 +94,7 @@ namespace HealthApp
                 {
                     client.SendFrame($"VERIFY,{user},{pass}");
                 }
-
-
-
-                    var msg = client.ReceiveFrameString();
+                var msg = client.ReceiveFrameString();
 
                 Console.WriteLine("From microservice: {0}", msg);
                 return msg;

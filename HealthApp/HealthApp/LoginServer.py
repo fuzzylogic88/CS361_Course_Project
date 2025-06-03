@@ -33,7 +33,9 @@ def main():
 
             # add new user
             if op == "ADD":
+                print("in add case")
                 b = registeredAccountExists(user, passw)
+                print(f"from add account check: {b}")
                 if b == "USER_UNREGISTERED_NO_PW":
                     print("adding account")
                     a = addAccount(user, passw)
@@ -69,49 +71,50 @@ def registeredAccountExists(user, passw):
     # Read JSON file
     with open('accounts.json') as data_file:
         json_data = json.load(data_file)
-
-        print(f"JSON contents: {json_data}")
-        u = user in json_data
-        p = json_data[user]["password"] == passw
+     
+        #print(f"JSON contents: {json_data}")
+        
+        user_data = json_data.get(user)
 
         #  user is in file and no password provided (presence check)
-        if (None is passw):
-            if u is True:
+        if (passw is None):
+            if user_data:
                 return "USER_REGISTERED_NO_PW"
             else:
                 return "USER_UNREGISTERED_NO_PW"
 
         # user in file and password provided (validation)
         else:
-            print("here")
-            if u is True and p is True:
-                print("passw is not none check a")
-                return "USER_REGISTERED_GOOD_PW"
-            else:
-                if u is True and p is False:
-                    print("passw is not none check b")
+            if user_data:
+                user_pw = user_data.get("password")
+                if user_pw == passw:
+                    return "USER_REGISTERED_GOOD_PW"
+                else:
                     return "USER_REGISTERED_BAD_PW"
+            else:
+                return "USER_UNREGISTERED_NO_PW"
 
 
 def addAccount(user, passw):
-    print("in add method")
-    user = {}
-    user[user] = {
+
+    with open('accounts.json') as data_file:
+        json_data = json.load(data_file)
+
+    json_data[user] = {
         "password": passw,
-        "personal_data": {
+        "personal_reminders": {
             "entry1": "",
             "entry2": "",
-            "entry3": ""
+            "entry3": "",
         }
     }
 
     print("account data created")
 
     # Write JSON file
-    with io.open('data.json', 'w', encoding='utf8') as outfile:
-        json.dump(user, outfile, indent=4, sort_keys=True,
-                  separators=(',', ':'),
-                  ensure_ascii=False)
+    with open("accounts.json", "w") as file:
+        json.dump(json_data, file, indent=2)
+
     print("account data written to JSON")
     return "USER_ADDED_OK"
 
