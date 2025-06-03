@@ -13,26 +13,27 @@
         VerticalAlignment="Top"
         Orientation="Horizontal">
         <Border
-            Margin="5,5,5,2.5"
-            Padding="5"
+            Height="50"
+            Margin="4,4,4,4"
+            Padding="8"
             CornerRadius="10">
             <Border.Background>
-                <SolidColorBrush Opacity="0.8" Color="Azure" />
+                <SolidColorBrush Opacity="0.9" Color="Azure" />
             </Border.Background>
             <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom">
                 <TextBlock
                     Height="40"
-                    Margin="4,4,0,4"
-                    FontSize="24"
-                    Text="Download new background image"
+                    Margin="5,5,5,5"
+                    FontSize="18"
+                    Text="Click to download a new background image"
                     TextAlignment="Center"
                     TextWrapping="Wrap" />
             </Grid>
         </Border>
         <Button
             x:Name="ImageSelectButton"
-            Width="64"
-            Height="64"
+            Width="48"
+            Height="48"
             Margin="4,4,0,0"
             HorizontalAlignment="Center"
             Click="ImageSelectButton_Click">

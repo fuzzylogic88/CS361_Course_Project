@@ -22,19 +22,32 @@ namespace HealthApp
         /// <param name="path"></param>
         public static void StartPythonScript(string script_path)
         {
-            var processInfo = new ProcessStartInfo
+            // check that we're not starting a dupe process
+            bool running = false;
+            foreach (Process p in MicroserviceHelpers.RunningMicroservices)
             {
-                FileName = pypath,
-                Arguments = $"\"{script_path}\"",  // Properly quoted in case of spaces
-                WorkingDirectory = Path.GetDirectoryName(script_path), // Set working directory
-                UseShellExecute = false,
-                WindowStyle = ProcessWindowStyle.Normal,
-                CreateNoWindow = false,
-            };
-            var msgProc = new Process { StartInfo = processInfo };
-            RunningMicroservices.Add(msgProc);
+                if (p.StartInfo.Arguments.ToString().Contains(script_path))
+                {
+                    running = true;
+                    break;
+                }
+            }
+            if (!running)
+            {
+                var processInfo = new ProcessStartInfo
+                {
+                    FileName = pypath,
+                    Arguments = $"\"{script_path}\"",  // Properly quoted in case of spaces
+                    WorkingDirectory = Path.GetDirectoryName(script_path), // Set working directory
+                    UseShellExecute = false,
+                    WindowStyle = ProcessWindowStyle.Normal,
+                    CreateNoWindow = false,
+                };
+                var msgProc = new Process { StartInfo = processInfo };
+                RunningMicroservices.Add(msgProc);
 
-            msgProc.Start();
+                msgProc.Start();
+            }
         }
 
         /// <summary>

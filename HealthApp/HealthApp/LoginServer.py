@@ -71,9 +71,7 @@ def registeredAccountExists(user, passw):
     # Read JSON file
     with open('accounts.json') as data_file:
         json_data = json.load(data_file)
-     
-        #print(f"JSON contents: {json_data}")
-        
+
         user_data = json_data.get(user)
 
         #  user is in file and no password provided (presence check)

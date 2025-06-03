@@ -5,8 +5,71 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:HealthApp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:HealthApp.ViewModels"
+    xmlns:vm="clr-namespace:HealthApp.ViewModels"
+    d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock
+            x:Name="greetingTextBlock"
+            Grid.Row="0"
+            FontSize="32"
+            TextAlignment="Center" />
+        <DockPanel
+            Grid.Row="1"
+            Margin="5"
+            VerticalAlignment="Top"
+            LastChildFill="False">
+            <TextBox
+                x:Name="reminderTextBox"
+                Width="300"
+                Height="30"
+                Margin="0,0,0,0"
+                VerticalAlignment="Center"
+                FontSize="18"
+                Style="{StaticResource placeHolderTextBox}"
+                Tag="Add a new reminder" />
+            <TextBlock />
+            <ComboBox
+                Name="rTypeComboBox"
+                Width="150"
+                Height="30"
+                Margin="5,5,5,5"
+                VerticalAlignment="Center"
+                FontSize="18"
+                Text="Cate" />
+            <DatePicker
+                x:Name="reminderDPicker"
+                Width="150"
+                VerticalAlignment="Center"
+                FontSize="16" />
+
+            <Button
+                x:Name="addButton"
+                Width="32"
+                Height="32"
+                Margin="5,0,0,0"
+                HorizontalAlignment="Center"
+                Click="AddButton_Click"
+                DockPanel.Dock="Right">
+                <Image Source="/Assets/add.png" />
+            </Button>
+        </DockPanel>
+        <ScrollViewer
+            Grid.Row="2"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility="Auto">
+            <local:ScrollableListControl x:Name="reminderList" />
+        </ScrollViewer>
+    </Grid>
 </UserControl>
+

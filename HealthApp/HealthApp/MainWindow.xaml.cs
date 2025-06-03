@@ -5,6 +5,7 @@
 
 using HealthApp.Properties;
 using HealthApp.ViewModels;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
@@ -47,14 +48,14 @@ namespace HealthApp
                 global_username = username;
             }
 
-            // Spin up Image server to wait for request
-            MicroserviceHelpers.StartPythonScript(image_scriptname);
+            // Spin up Image server to wait for request, only if not already open
+            MicroserviceHelpers.StartPythonScript(image_scriptname);      
         }
 
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             await LoadBackgroundImage();
-            mv.SwitchPaneCommand.Execute("default");
+            mv.SwitchPaneCommand.Execute("data");
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -126,7 +127,7 @@ namespace HealthApp
 
         private void DataViewPaneButton_Click(object sender, RoutedEventArgs e)
         {
-
+            mv.SwitchPaneCommand.Execute("data");
         }
 
         private void TrackerPaneButton_Click(object sender, RoutedEventArgs e)

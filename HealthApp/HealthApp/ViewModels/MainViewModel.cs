@@ -14,7 +14,7 @@ namespace HealthApp.ViewModels
     {
         private bool _isEventSet;
         private string? _labelText;
-        private object _currentPane = new DefaultView();
+        private object _currentPane = new DataViewPane();
 
         public bool IsEventSet
         {
@@ -66,7 +66,6 @@ namespace HealthApp.ViewModels
         {
             CurrentPane = paneType switch
             {
-                "default" => new DefaultView(),
                 "data" => new DataViewPane(),
                 "timer" => new TimerPane(),
                 "calorie" => new CalorieReferencePane(),

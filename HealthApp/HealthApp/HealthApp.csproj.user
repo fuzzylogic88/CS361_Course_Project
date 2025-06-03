@@ -5,7 +5,7 @@
     <Compile Update="CalorieReferencePane.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="DefaultView.xaml.cs">
+    <Compile Update="DataViewPane.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ScrollListItemControl.xaml.cs">
@@ -21,9 +21,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="SettingsPane.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="DataViewPane.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

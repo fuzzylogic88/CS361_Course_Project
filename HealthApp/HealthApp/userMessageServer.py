@@ -1,4 +1,4 @@
-# Microservice itself that upon request, sends an encouraging message to the client
+# Microservice that upon request, sends an encouraging message to the client
 
 from os import system
 import datetime
@@ -20,7 +20,7 @@ if len(message) > 0:
         socket.send_string('ERR')
 
     randInt = datetime.datetime.now()
-    randInt = str(((randInt.second) * (randInt.microsecond)) % 2)
+    randInt = str(((randInt.second) * (randInt.microsecond)) % 99)
     with open('encouragement.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
         friendlyMessage = data[randInt]
