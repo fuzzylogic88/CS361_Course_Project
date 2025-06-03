@@ -24,7 +24,7 @@ namespace HealthApp
         {
             // check that we're not starting a dupe process
             bool running = false;
-            foreach (Process p in MicroserviceHelpers.RunningMicroservices)
+            foreach (Process p in RunningMicroservices)
             {
                 if (p.StartInfo.Arguments.ToString().Contains(script_path))
                 {
@@ -47,19 +47,6 @@ namespace HealthApp
                 RunningMicroservices.Add(msgProc);
 
                 msgProc.Start();
-            }
-        }
-
-        /// <summary>
-        /// Terminates any running python scripts on app exit
-        /// </summary>
-        public static void StopMicroservices()
-        {
-            foreach (Process p in RunningMicroservices)
-            {
-                if (!p.HasExited) {
-                    p.Kill(true);
-                }
             }
         }
     }

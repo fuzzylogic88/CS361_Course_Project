@@ -8,7 +8,6 @@
     Title="HealthApp"
     Width="800"
     Height="450"
-    Closing="MainWindow_Closing"
     Loaded="MainWindow_Loaded"
     mc:Ignorable="d">
     <Grid>

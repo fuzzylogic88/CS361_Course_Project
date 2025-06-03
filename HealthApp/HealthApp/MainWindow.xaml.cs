@@ -58,11 +58,6 @@ namespace HealthApp
             mv.SwitchPaneCommand.Execute("data");
         }
 
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            MicroserviceHelpers.StopMicroservices();
-        }
-
         private static async Task LoadBackgroundImage()
         {
             try
