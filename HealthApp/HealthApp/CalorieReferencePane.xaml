@@ -67,7 +67,7 @@
             VerticalAlignment="Stretch"
             HorizontalScrollBarVisibility="Disabled"
             VerticalScrollBarVisibility="Auto">
-            <local:FoodListControl x:Name="foodList" />
+            <local:ScrollableListControl x:Name="foodList" />
         </ScrollViewer>
     </Grid>
 </UserControl>

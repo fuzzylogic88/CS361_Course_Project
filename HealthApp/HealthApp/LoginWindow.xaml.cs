@@ -6,11 +6,8 @@
 using HealthApp.ViewModels;
 using NetMQ;
 using NetMQ.Sockets;
-using System.Diagnostics;
-using System.IO;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Threading;
 
 namespace HealthApp
@@ -21,8 +18,6 @@ namespace HealthApp
     public partial class LoginWindow : Window
     {
         private readonly Dispatcher _dispatcher;
-
-        private readonly string account_fname = @"accounts.txt";
 
         /// <summary>
         /// Microservice python scripts in application directory
@@ -144,6 +139,10 @@ namespace HealthApp
 
             else if (AccountExistsOnServer(user, pass) == "USER_REGISTERED_GOOD_PW")
             {
+                using var client = new RequestSocket();
+                client.Connect("tcp://127.0.0.1:5555");
+                client.SendFrame("Q");
+
                 // successful login, pop up our main window
                 var mw = new MainWindow(false, user);
                 mw.Show();

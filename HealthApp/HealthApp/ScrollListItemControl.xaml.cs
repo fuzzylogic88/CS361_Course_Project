@@ -12,11 +12,11 @@ using System.Windows.Media;
 namespace HealthApp
 {
     /// <summary>
-    /// Interaction logic for FoodEntryControl.xaml
+    /// Interaction logic for ScrollListItemControl.xaml
     /// </summary>
-    public partial class FoodEntryControl : UserControl
+    public partial class ScrollListItemControl : UserControl
     {
-        public FoodEntryControl()
+        public ScrollListItemControl()
         {
             InitializeComponent();
             this.MouseDoubleClick += OnMouseDoubleClick;
@@ -25,20 +25,23 @@ namespace HealthApp
         private void OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             // determine which control was clicked by the user and open the URL in a browser
-            OpenLinkInBrowser(FoodLink);
+            if (!string.IsNullOrEmpty(FoodLink))
+            {
+                OpenLinkInBrowser(FoodLink);
+            }
         }
 
         public static readonly DependencyProperty ImageSourceDP =
-            DependencyProperty.Register("FoodImageSource", typeof(ImageSource), typeof(FoodEntryControl));
+            DependencyProperty.Register("FoodImageSource", typeof(ImageSource), typeof(ScrollListItemControl));
 
         public static readonly DependencyProperty FoodNameDP =
-            DependencyProperty.Register("FoodName", typeof(string), typeof(FoodEntryControl));
+            DependencyProperty.Register("FoodName", typeof(string), typeof(ScrollListItemControl));
 
         public static readonly DependencyProperty DescriptionDP =
-            DependencyProperty.Register("FoodDescription", typeof(string), typeof(FoodEntryControl));
+            DependencyProperty.Register("FoodDescription", typeof(string), typeof(ScrollListItemControl));
 
         public static readonly DependencyProperty InternetLocationDP = 
-            DependencyProperty.Register("FoodLink",typeof(string), typeof(FoodEntryControl));   
+            DependencyProperty.Register("FoodLink",typeof(string), typeof(ScrollListItemControl));   
 
         public string FoodLink
         {

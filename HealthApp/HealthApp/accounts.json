@@ -1,10 +1,17 @@
 {
-  "user": {
+  "Daniel": {
     "password": "pass",
     "personal_reminders": {
-      "entry1": "",
-      "entry2": "",
-      "entry3": ""
+      "entry1": "6-2-2025,Run 10 Kilometers,Run",
+      "entry2": "6-2-2025,Swim 2.5 Kilometers,Swim",
+      "entry3": "6-2-2025,Cycle 30 Kilometers,Cycle",
+      "entry4": "",
+      "entry5": "",
+      "entry6": "",
+      "entry7": "",
+      "entry8": "",
+      "entry9": "",
+      "entry10": ""
     }
   }
 }

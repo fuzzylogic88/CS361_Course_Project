@@ -22,7 +22,7 @@ namespace HealthApp
         {
             InitializeComponent();
 
-            ObservableCollection<FoodEntryControl> fEntries = [];
+            ObservableCollection<ScrollListItemControl> fEntries = [];
 
             List<string> fdata = [.. File.ReadAllLines(food_fname)];
             if (fdata.Count > 0)
@@ -64,9 +64,9 @@ namespace HealthApp
             return strings;
         }
 
-        public static ObservableCollection<FoodEntryControl> GetFoodEntries(List<string> fdata)
+        public static ObservableCollection<ScrollListItemControl> GetFoodEntries(List<string> fdata)
         {
-            ObservableCollection<FoodEntryControl> fColl = [];
+            ObservableCollection<ScrollListItemControl> fColl = [];
             foreach (string f in fdata)
             {
                 string[] split = f.Split(",");
@@ -74,7 +74,7 @@ namespace HealthApp
                 {
                     try
                     {
-                        FoodEntryControl foodEntryControl = new()
+                        ScrollListItemControl foodEntryControl = new()
                         {
                             FoodName = split[0],
                             Description = split[1],
@@ -99,7 +99,7 @@ namespace HealthApp
             string query = searchTextBox.Text;
             if (!string.IsNullOrEmpty(query))
             {
-                List<FoodEntryControl> sortedList = [];
+                List<ScrollListItemControl> sortedList = [];
 
                 List<string> fdata = [.. File.ReadAllLines(food_fname)];
                 if (fdata.Count > 0)
@@ -111,7 +111,7 @@ namespace HealthApp
                         // match category and add to list
                         if (split[0].Contains(query, StringComparison.OrdinalIgnoreCase) || query.Contains(split[0], StringComparison.OrdinalIgnoreCase))
                         {
-                            sortedList.Add(new FoodEntryControl()
+                            sortedList.Add(new ScrollListItemControl()
                             {
                                 FoodName = split[0],
                                 Description = split[1],
@@ -136,7 +136,7 @@ namespace HealthApp
         /// <param name="e"></param>
         private void foodComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<FoodEntryControl> sortedList = [];
+            List<ScrollListItemControl> sortedList = [];
             var cBox = sender as ComboBox;
             if (cBox != null)
             {
@@ -153,7 +153,7 @@ namespace HealthApp
                             // match category and add to list
                             if (split[4].Equals(selectedItemText, StringComparison.OrdinalIgnoreCase))
                             {
-                                sortedList.Add(new FoodEntryControl()
+                                sortedList.Add(new ScrollListItemControl()
                                 {
                                     FoodName = split[0],
                                     Description = split[1],
@@ -173,7 +173,7 @@ namespace HealthApp
 
         private void UndoButton_Click(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<FoodEntryControl> fEntries = [];
+            ObservableCollection<ScrollListItemControl> fEntries = [];
 
             List<string> fdata = [.. File.ReadAllLines(food_fname)];
             if (fdata.Count > 0)

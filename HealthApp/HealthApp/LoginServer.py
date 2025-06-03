@@ -2,7 +2,6 @@
 # Author: Daniel Green (greend5@oregonstate.edu)
 
 from os import system
-import io
 import zmq
 import json
 import sys
@@ -22,6 +21,7 @@ def main():
         if len(message) > 0:
             if message == 'Q':
                 print('Client has requested to close connection!')
+                sys.exit(0)
         try:
             split = message.split(',')
             op = split[0]
@@ -106,6 +106,13 @@ def addAccount(user, passw):
             "entry1": "",
             "entry2": "",
             "entry3": "",
+            "entry4": "",
+            "entry5": "",
+            "entry6": "",
+            "entry7": "",
+            "entry8": "",
+            "entry9": "",
+            "entry10": "",
         }
     }
 

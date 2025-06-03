@@ -10,17 +10,17 @@ using System.Windows.Controls;
 namespace HealthApp
 {
     /// <summary>
-    /// Interaction logic for FoodListControl.xaml
+    /// Interaction logic for ScrollableListControl.xaml
     /// </summary>
-    public partial class FoodListControl : UserControl
+    public partial class ScrollableListControl : UserControl
     {
         public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(FoodListControl));
+            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ScrollableListControl));
 
         /// <summary>
-        /// A control to organize the FoodEntryControl item
+        /// A control to organize the ScrollListItemControl item
         /// </summary>
-        public FoodListControl()
+        public ScrollableListControl()
         {
             InitializeComponent();
             FoodItemsControl.ItemsSource = ItemsSource;

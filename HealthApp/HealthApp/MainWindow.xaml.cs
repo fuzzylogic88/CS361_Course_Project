@@ -23,6 +23,8 @@ namespace HealthApp
 
         public static System.Windows.Controls.Grid? bgContentGrid;
 
+        public static string global_username = string.Empty;
+
         public MainWindow(bool guest, string username)
         {
             InitializeComponent();
@@ -42,6 +44,7 @@ namespace HealthApp
             else
             {
                 this.Title = $"HealthApp - {username}";
+                global_username = username;
             }
 
             // Spin up Image server to wait for request
@@ -51,6 +54,7 @@ namespace HealthApp
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             await LoadBackgroundImage();
+            mv.SwitchPaneCommand.Execute("default");
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

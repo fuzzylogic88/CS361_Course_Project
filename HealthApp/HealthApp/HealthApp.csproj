@@ -14,7 +14,9 @@
 
   <ItemGroup>
     <None Remove="accounts.json" />
+    <None Remove="Assets\add.png" />
     <None Remove="Assets\appicon.png" />
+    <None Remove="Assets\cycle.png" />
     <None Remove="Assets\default_bg.jpg" />
     <None Remove="Assets\FoodImages\burger.png" />
     <None Remove="Assets\FoodImages\burrito.jpg" />
@@ -25,10 +27,13 @@
     <None Remove="Assets\FoodImages\sherbet.jpg" />
     <None Remove="Assets\FoodImages\waffles.jpg" />
     <None Remove="Assets\FoodImages\water.jpg" />
+    <None Remove="Assets\Hike.png" />
     <None Remove="Assets\image.png" />
     <None Remove="Assets\pauseIcon.png" />
     <None Remove="Assets\playIcon.png" />
+    <None Remove="Assets\run.png" />
     <None Remove="Assets\searchIcon.png" />
+    <None Remove="Assets\swim.png" />
     <None Remove="Assets\timerIcon.png" />
     <None Remove="Assets\undoIcon.png" />
     <None Remove="encouragement.json" />
@@ -43,8 +48,14 @@
     <Content Include="accounts.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\appicon.ico" />
     <Content Include="Assets\appicon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\cycle.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\default_bg.jpg">
@@ -77,6 +88,9 @@
     <Content Include="Assets\FoodImages\water.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Hike.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\image.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -86,7 +100,13 @@
     <Content Include="Assets\playIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\run.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\searchIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\swim.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\timerIcon.png">
@@ -99,9 +119,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LoginServer.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="reminders.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="encouragement.json">

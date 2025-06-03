@@ -8,10 +8,10 @@
     xmlns:viewmodels="clr-namespace:HealthApp.ViewModels"
     xmlns:vm="clr-namespace:HealthApp.ViewModels"
     Title="HealthApp - Login"
-    Closing="Window_Closing"
     Width="800"
     Height="450"
     d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+    Closing="Window_Closing"
     mc:Ignorable="d">
 
     <Window.DataContext>

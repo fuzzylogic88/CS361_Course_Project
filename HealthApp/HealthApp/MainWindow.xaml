@@ -59,7 +59,7 @@
             <Button
                 Name="DataViewPaneButton"
                 Click="DataViewPaneButton_Click"
-                Content="📅  Data View" />
+                Content="📅  Reminder View" />
             <Button
                 Name="FoodReferencePaneButton"
                 Click="FoodReferencePaneButton_Click"
